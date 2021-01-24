@@ -42,7 +42,7 @@ const store = new Vuex.Store({
         showTimeOnCard: true,
         cardBgMode: 0, // 0 for image or 1 for pure color
         imageUrl: '',
-        pureColor: ''
+        pureColor: '#7AE9FFFF'
     },
     mutations: {
         changePosition(state, position){
