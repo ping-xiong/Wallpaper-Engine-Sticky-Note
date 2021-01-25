@@ -114,6 +114,17 @@
 
                                 </div>
 
+                                <div  class="setting-item">
+                                    <div class="setting-title">
+                                        <v-icon>mdi-delete</v-icon>
+                                        {{$t('message.removeAllData')}}
+                                    </div>
+
+                                    <v-btn color="red" @click="del" :title="$t('message.removeAllData')">
+                                        <v-icon>mdi-delete</v-icon>
+                                        {{$t('message.removeAllData')}}
+                                    </v-btn>
+                                </div>
                             </div>
                         </v-card-text>
 
@@ -157,6 +168,31 @@ export default {
         dialog: false,
         showTimeCheckStatus: true
     }),
+    created() {
+        window.wallpaperPropertyListener = {
+            applyUserProperties: function(properties) {
+                if (properties.backgroundmode){
+                    this.$store.commit('changeBgMode', properties.backgroundmode.value)
+                }
+                if (properties.backgroundcolor) {
+                    // Convert the custom color to 0 - 255 range for CSS usage
+                    let customColor = properties.backgroundcolor.value.split(' ');
+                    customColor = customColor.map(function(c) {
+                        return Math.ceil(c * 255);
+                    });
+                    let customColorAsCSS = 'rgb(' + customColor + ')';
+                    // save color
+                    this.$store.commit('updateColor', customColorAsCSS)
+                }
+                if (properties.backgroundimage) {
+                    // Read the file
+                    let customImageFile = 'file:///' + properties.backgroundimage.value;
+                    // save image
+                    this.$store.commit('updateImageUrl', customImageFile)
+                }
+            },
+        };
+    },
     mounted() {
         window.onresize = () => {
             return (() => {
@@ -201,6 +237,10 @@ export default {
         },
         updateColor(e){
             this.$store.commit('updateColor', e.hexa)
+        },
+        del(){
+            localStorage.removeItem('wallpaper_sticky_note_data')
+            location.reload()
         }
     },
     computed:{

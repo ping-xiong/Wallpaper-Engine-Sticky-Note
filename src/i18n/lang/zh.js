@@ -16,7 +16,8 @@ const zh = {
         imageUrlHint: '请输入背景图片链接地址',
         dataSave: '所有数据只保存在本地。',
         sourceCode: '源代码地址',
-        contact: '联系我'
+        contact: '联系我',
+        removeAllData: '删除所有数据'
     }
 }
 

@@ -16,7 +16,8 @@ const en = {
         imageUrlHint: 'Please input the background image url',
         dataSave: 'All data is only saved in local storage.',
         sourceCode: 'Source Code',
-        contact: 'Contact Me'
+        contact: 'Contact Me',
+        removeAllData: 'Delete All Data'
     }
 }
 
